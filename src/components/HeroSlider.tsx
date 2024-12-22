@@ -1,25 +1,26 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 const slides = [
   {
     image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=80",
-    title: "Timeless Elegance",
+    title: "Timeless Elegance ✨",
     subtitle: "Where vintage meets modern sophistication",
-    cta: "Shop Collection",
+    cta: "Explore Collection",
   },
   {
     image: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&q=80",
-    title: "Classic Design",
+    title: "Classic Design 🎨",
     subtitle: "Curated pieces that tell stories",
-    cta: "Learn More",
+    cta: "Discover More",
   },
   {
     image: "https://images.unsplash.com/photo-1501045661006-fcebe0257c3f?auto=format&fit=crop&q=80",
-    title: "Bespoke Creation",
+    title: "Bespoke Creation 🪑",
     subtitle: "Handcrafted to your vision",
-    cta: "Start Custom Order",
+    cta: "Start Your Journey",
   },
 ];
 
@@ -44,11 +45,15 @@ export const HeroSlider = () => {
   return (
     <div className="relative h-screen w-full overflow-hidden">
       {slides.map((slide, index) => (
-        <div
+        <motion.div
           key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? "opacity-100" : "opacity-0"
-          }`}
+          initial={{ opacity: 0 }}
+          animate={{ 
+            opacity: index === currentSlide ? 1 : 0,
+            scale: index === currentSlide ? 1 : 1.1
+          }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0"
           style={{
             backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${slide.image})`,
             backgroundSize: "cover",
@@ -56,21 +61,37 @@ export const HeroSlider = () => {
           }}
         >
           <div className="container mx-auto h-full flex items-center">
-            <div className="max-w-2xl text-white p-8 animate-fade-in relative">
+            <motion.div
+              initial={{ x: -100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="max-w-2xl text-white p-8 glass-effect rounded-xl relative"
+            >
               <div className="absolute -left-4 top-1/2 w-1 h-20 bg-[#9b87f5] transform -translate-y-1/2"></div>
-              <h1 className="text-6xl font-light mb-4 leading-tight">{slide.title}</h1>
-              <p className="text-xl mb-8 opacity-90">{slide.subtitle}</p>
+              <span className="text-sm uppercase tracking-widest text-[#9b87f5] mb-4 block animate-typewriter">
+                Welcome to Excellence
+              </span>
+              <h1 className="text-6xl font-light mb-4 leading-tight text-gradient">
+                {slide.title}
+              </h1>
+              <p className="text-xl mb-8 opacity-90 font-light">
+                {slide.subtitle}
+              </p>
               <Button
                 size="lg"
                 className="bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white transition-all duration-300 relative group"
               >
-                <span className="relative z-10">{slide.cta}</span>
+                <span className="relative z-10 flex items-center gap-2">
+                  {slide.cta}
+                  <Sparkles className="w-4 h-4 animate-float" />
+                </span>
                 <span className="absolute inset-0 blur-md bg-[#9b87f5] opacity-0 group-hover:opacity-50 transition-opacity duration-300"></span>
               </Button>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       ))}
+      
       <Button
         variant="ghost"
         size="icon"

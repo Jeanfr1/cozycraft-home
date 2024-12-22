@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, Search, ShoppingCart, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -14,9 +15,12 @@ export const Header = () => {
   }, []);
 
   return (
-    <header
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white shadow-md" : "bg-transparent"
+        isScrolled ? "bg-white/80 backdrop-blur-lg shadow-md" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
@@ -25,38 +29,37 @@ export const Header = () => {
             <Button variant="ghost" className="md:hidden">
               <Menu className="h-6 w-6" />
             </Button>
-            <a href="/" className="text-2xl font-bold text-[#9b87f5] transition-all duration-300 hover:text-[#9b87f5]/80 relative group">
+            <a href="/" className="text-2xl font-marcellus text-[#9b87f5] transition-all duration-300 hover:text-[#9b87f5]/80 relative group">
               <span className="relative z-10">Elisabeth Laidin Wood Design</span>
               <span className="absolute inset-0 blur-md bg-[#9b87f5]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </a>
             <nav className="hidden md:flex space-x-8">
-              <a href="#" className="text-neutral-800 hover:text-[#9b87f5] transition-colors">
-                Shop
-              </a>
-              <a href="#" className="text-neutral-800 hover:text-[#9b87f5] transition-colors">
-                Custom Orders
-              </a>
-              <a href="#" className="text-neutral-800 hover:text-[#9b87f5] transition-colors">
-                About
-              </a>
-              <a href="#" className="text-neutral-800 hover:text-[#9b87f5] transition-colors">
-                Contact
-              </a>
+              {["Shop", "Custom Orders", "About", "Contact"].map((item) => (
+                <a 
+                  key={item}
+                  href="#" 
+                  className="text-neutral-800 hover:text-[#9b87f5] transition-colors hover-line font-light"
+                >
+                  {item}
+                </a>
+              ))}
             </nav>
           </div>
           <div className="flex items-center space-x-6">
-            <Button variant="ghost" size="icon" className="hover:text-[#9b87f5] transition-colors">
-              <Search className="h-5 w-5" />
-            </Button>
-            <Button variant="ghost" size="icon" className="hover:text-[#9b87f5] transition-colors">
-              <User className="h-5 w-5" />
-            </Button>
-            <Button variant="ghost" size="icon" className="hover:text-[#9b87f5] transition-colors">
-              <ShoppingCart className="h-5 w-5" />
-            </Button>
+            {[Search, User, ShoppingCart].map((Icon, index) => (
+              <Button
+                key={index}
+                variant="ghost"
+                size="icon"
+                className="hover:text-[#9b87f5] transition-colors relative group"
+              >
+                <Icon className="h-5 w-5" />
+                <span className="absolute inset-0 blur-md bg-[#9b87f5]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></span>
+              </Button>
+            ))}
           </div>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 };

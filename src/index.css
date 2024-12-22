@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Raleway:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -82,5 +84,51 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Raleway', sans-serif;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Marcellus', serif;
+  }
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #9b87f5;
+  animation: 
+    typewriter 4s steps(44) 1s 1 normal both,
+    blink 1s steps(44) infinite normal;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.glass-effect {
+  @apply backdrop-blur-lg bg-white/10 border border-white/20 shadow-lg;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#9b87f5] to-[#D6BCFA];
+}
+
+.hover-line {
+  @apply relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#9b87f5] 
+         after:transition-all after:duration-300 hover:after:w-full;
 }
