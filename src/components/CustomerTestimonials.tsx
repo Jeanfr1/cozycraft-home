@@ -9,19 +9,19 @@ import { Star } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "The attention to detail in our dining table is remarkable. It's become the centerpiece of our home.",
+    quote: "L'attention aux détails de notre table à manger est remarquable. Elle est devenue la pièce maîtresse de notre maison.",
     name: "Sarah Mitchell",
     image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80",
     rating: 5,
   },
   {
-    quote: "Their commitment to sustainable practices while maintaining exceptional quality is why we keep coming back.",
+    quote: "Leur engagement envers les pratiques durables tout en maintenant une qualité exceptionnelle est la raison pour laquelle nous revenons.",
     name: "James Wilson",
     image: "https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&q=80",
     rating: 5,
   },
   {
-    quote: "The vintage-inspired armchair they crafted perfectly captures the essence of our home's style.",
+    quote: "Le fauteuil d'inspiration vintage qu'ils ont créé capture parfaitement l'essence du style de notre maison.",
     name: "Emma Thompson",
     image: "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=80",
     rating: 5,
@@ -33,7 +33,7 @@ export const CustomerTestimonials = () => {
     <section className="py-20 bg-neutral-50">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-12 text-[#9b87f5] transition-all duration-300 hover:text-[#9b87f5]/80 relative group">
-          What Our Clients Say
+          Ce Que Disent Nos Clients
           <span className="absolute inset-0 blur-md bg-[#9b87f5]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
         </h2>
         <Carousel className="w-full max-w-4xl mx-auto">

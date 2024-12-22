@@ -7,16 +7,14 @@ export const Footer = () => {
   return (
     <footer className="bg-gradient-to-b from-neutral-50 to-neutral-100 pt-20 pb-10">
       <div className="container mx-auto px-4">
-        {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          {/* About Column */}
           <div className="space-y-6">
             <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#9b87f5] to-[#D6BCFA]">
-              Elisabeth Laidin Wood Design
+              Elisabeth Laidin Design Bois
             </h3>
             <p className="text-neutral-600 leading-relaxed">
-              Crafting timeless furniture pieces that blend artistry with functionality. Each piece tells a unique story of
-              craftsmanship and dedication.
+              Création de meubles intemporels alliant art et fonctionnalité. Chaque pièce raconte une histoire unique
+              d'artisanat et de dévouement.
             </p>
             <div className="flex space-x-4">
               <Button 
@@ -43,23 +41,22 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-[#7E69AB]">Quick Links</h3>
+            <h3 className="text-lg font-semibold text-[#7E69AB]">Liens Rapides</h3>
             <ul className="space-y-3">
               <li>
                 <a href="/shop" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
-                  Shop
+                  Boutique
                 </a>
               </li>
               <li>
                 <a href="/about" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
-                  About Us
+                  À Propos
                 </a>
               </li>
               <li>
                 <a href="/custom" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
-                  Custom Orders
+                  Commandes Sur Mesure
                 </a>
               </li>
               <li>
@@ -70,23 +67,22 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Customer Service */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-[#7E69AB]">Customer Service</h3>
+            <h3 className="text-lg font-semibold text-[#7E69AB]">Service Client</h3>
             <ul className="space-y-3">
               <li>
                 <a href="/shipping" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
-                  Shipping Information
+                  Informations de Livraison
                 </a>
               </li>
               <li>
                 <a href="/returns" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
-                  Returns & Exchanges
+                  Retours & Échanges
                 </a>
               </li>
               <li>
                 <a href="/care" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
-                  Care Instructions
+                  Instructions d'Entretien
                 </a>
               </li>
               <li>
@@ -97,27 +93,25 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Information */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-[#7E69AB]">Contact Us</h3>
+            <h3 className="text-lg font-semibold text-[#7E69AB]">Contactez-nous</h3>
             <ul className="space-y-4">
               <li className="flex items-center space-x-3 text-neutral-600">
                 <MapPin className="h-5 w-5 text-[#9b87f5]" />
-                <span>123 Craftsman Way, Artisan City, AC 12345</span>
+                <span>123 Rue de l'Artisan, Ville Artisanale, 75001</span>
               </li>
               <li className="flex items-center space-x-3 text-neutral-600">
                 <Phone className="h-5 w-5 text-[#9b87f5]" />
-                <span>(555) 123-4567</span>
+                <span>01 23 45 67 89</span>
               </li>
               <li className="flex items-center space-x-3 text-neutral-600">
                 <Mail className="h-5 w-5 text-[#9b87f5]" />
-                <span>info@elisabethlaidin.com</span>
+                <span>contact@elisabethlaidin.fr</span>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Payment Methods */}
         <div className="border-t border-neutral-200 pt-8 pb-6">
           <div className="flex flex-wrap justify-center gap-6">
             <img 
@@ -147,17 +141,16 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright and Legal */}
         <div className="border-t border-neutral-200 pt-8 text-center">
           <p className="text-sm text-neutral-500 mb-4">
-            © {currentYear} Elisabeth Laidin Wood Design. All rights reserved.
+            © {currentYear} Elisabeth Laidin Design Bois. Tous droits réservés.
           </p>
           <div className="flex justify-center space-x-6 text-sm">
             <a href="/privacy" className="text-neutral-500 hover:text-[#9b87f5] transition-colors hover-line">
-              Privacy Policy
+              Politique de Confidentialité
             </a>
             <a href="/terms" className="text-neutral-500 hover:text-[#9b87f5] transition-colors hover-line">
-              Terms of Service
+              Conditions d'Utilisation
             </a>
           </div>
         </div>

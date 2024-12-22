@@ -3,21 +3,21 @@ import { Leaf, Recycle, TreePine } from "lucide-react";
 const practices = [
   {
     icon: TreePine,
-    title: "Responsible Sourcing",
+    title: "Approvisionnement Responsable",
     description:
-      "We partner with certified sustainable forests and suppliers who share our commitment to environmental stewardship.",
+      "Nous collaborons avec des forêts certifiées et des fournisseurs qui partagent notre engagement envers la protection de l'environnement.",
   },
   {
     icon: Recycle,
-    title: "Zero Waste Workshop",
+    title: "Atelier Zéro Déchet",
     description:
-      "Our workshop implements a comprehensive recycling program, ensuring wood scraps and materials are repurposed.",
+      "Notre atelier met en œuvre un programme de recyclage complet, assurant que les chutes de bois et les matériaux sont réutilisés.",
   },
   {
     icon: Leaf,
-    title: "Eco-Friendly Finishes",
+    title: "Finitions Écologiques",
     description:
-      "We use natural, low-VOC finishes and treatments that are safe for both your home and the environment.",
+      "Nous utilisons des finitions naturelles à faible COV qui sont sûres pour votre maison et l'environnement.",
   },
 ];
 
@@ -26,7 +26,7 @@ export const SustainabilityCommitment = () => {
     <section className="py-20">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-12 text-[#9b87f5] transition-all duration-300 hover:text-[#9b87f5]/80 relative group">
-          Our Commitment to Sustainability
+          Notre Engagement pour la Durabilité
           <span className="absolute inset-0 blur-md bg-[#9b87f5]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

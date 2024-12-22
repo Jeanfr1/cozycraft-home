@@ -30,11 +30,11 @@ export const Header = () => {
               <Menu className="h-6 w-6" />
             </Button>
             <a href="/" className="text-2xl font-marcellus text-[#9b87f5] transition-all duration-300 hover:text-[#9b87f5]/80 relative group">
-              <span className="relative z-10">Elisabeth Laidin Wood Design</span>
+              <span className="relative z-10">Elisabeth Laidin Design Bois</span>
               <span className="absolute inset-0 blur-md bg-[#9b87f5]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </a>
             <nav className="hidden md:flex space-x-8">
-              {["Shop", "Custom Orders", "About", "Contact"].map((item) => (
+              {["Boutique", "Commandes sur Mesure", "À Propos", "Contact"].map((item) => (
                 <a 
                   key={item}
                   href="#" 

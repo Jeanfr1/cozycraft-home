@@ -6,38 +6,38 @@ import { ProgressiveImg } from "@/components/ui/progressive-img";
 const products = [
   {
     id: 1,
-    name: "Sculptural Velvet Armchair",
-    price: "$2,499",
+    name: "Fauteuil en Velours Sculptural",
+    price: "2.499 €",
     image: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&q=80",
-    description: "Contemporary elegance",
+    description: "Élégance contemporaine",
   },
   {
     id: 2,
-    name: "Ethereal Glass Console",
-    price: "$1,899",
+    name: "Console en Verre Éthérée",
+    price: "1.899 €",
     image: "https://images.unsplash.com/photo-1554295405-abb8fd54f153?auto=format&fit=crop&q=80",
-    description: "Minimalist sophistication",
+    description: "Sophistication minimaliste",
   },
   {
     id: 3,
-    name: "Artisan Wooden Cabinet",
-    price: "$3,299",
+    name: "Armoire Artisanale en Bois",
+    price: "3.299 €",
     image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80",
-    description: "Timeless craftsmanship",
+    description: "Artisanat intemporel",
   },
   {
     id: 4,
-    name: "Modern Lounge Chair",
-    price: "$2,149",
+    name: "Chaise Longue Moderne",
+    price: "2.149 €",
     image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&q=80",
-    description: "Refined comfort",
+    description: "Confort raffiné",
   },
   {
     id: 5,
-    name: "Designer Writing Desk",
-    price: "$2,899",
+    name: "Bureau Design",
+    price: "2.899 €",
     image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=80",
-    description: "Elegant workspace",
+    description: "Espace de travail élégant",
   },
 ];
 
@@ -59,11 +59,11 @@ export const NewArrivals = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center mb-16 text-center">
           <h2 className="text-5xl font-light text-neutral-800 mb-4 tracking-wide">
-            Latest Creations
+            Dernières Créations
           </h2>
           <div className="w-24 h-0.5 bg-[#9b87f5] mb-6"></div>
           <p className="text-neutral-600 max-w-2xl mx-auto leading-relaxed">
-            Discover our newest collection of meticulously crafted pieces, where timeless elegance meets contemporary design.
+            Découvrez notre nouvelle collection de pièces méticuleusement créées, où l'élégance intemporelle rencontre le design contemporain.
           </p>
         </div>
         
