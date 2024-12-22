@@ -5,33 +5,33 @@ import { Button } from "@/components/ui/button";
 const products = [
   {
     id: 1,
-    name: "Modern Dining Chair",
-    price: "$599",
-    image: "https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&q=80",
+    name: "Vintage Dining Chair",
+    price: "$799",
+    image: "https://images.unsplash.com/photo-1579656592043-a20e25a4aa4b?auto=format&fit=crop&q=80",
   },
   {
     id: 2,
-    name: "Leather Lounge Chair",
-    price: "$1,299",
-    image: "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?auto=format&fit=crop&q=80",
+    name: "Classic Armchair",
+    price: "$1,499",
+    image: "https://images.unsplash.com/photo-1549187774-b4e9b0445b41?auto=format&fit=crop&q=80",
   },
   {
     id: 3,
-    name: "Wooden Coffee Table",
-    price: "$899",
+    name: "Antique Coffee Table",
+    price: "$1,299",
     image: "https://images.unsplash.com/photo-1532372320572-cda25653a26d?auto=format&fit=crop&q=80",
   },
   {
     id: 4,
-    name: "Bedside Table",
-    price: "$449",
-    image: "https://images.unsplash.com/photo-1611486212557-88be5ff6f941?auto=format&fit=crop&q=80",
+    name: "Vintage Side Table",
+    price: "$649",
+    image: "https://images.unsplash.com/photo-1551298370-9d3d53740c72?auto=format&fit=crop&q=80",
   },
   {
     id: 5,
-    name: "Office Desk",
-    price: "$1,199",
-    image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80",
+    name: "Classic Writing Desk",
+    price: "$1,899",
+    image: "https://images.unsplash.com/photo-1493934558415-9d19f0b2b4d2?auto=format&fit=crop&q=80",
   },
 ];
 

@@ -3,23 +3,23 @@ import { Button } from "@/components/ui/button";
 const collections = [
   {
     title: "Living Room",
-    image: "https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?auto=format&fit=crop&q=80",
-    description: "Comfort meets elegance",
+    image: "https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&q=80",
+    description: "Timeless comfort and style",
   },
   {
     title: "Dining Room",
-    image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&q=80",
-    description: "Gather in style",
+    image: "https://images.unsplash.com/photo-1597072689227-8882273e8f6a?auto=format&fit=crop&q=80",
+    description: "Elegant dining experiences",
   },
   {
     title: "Bedroom",
-    image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&q=80",
-    description: "Peaceful retreats",
+    image: "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&q=80",
+    description: "Serene vintage retreats",
   },
   {
     title: "Home Office",
-    image: "https://images.unsplash.com/photo-1486946255434-2466348c2166?auto=format&fit=crop&q=80",
-    description: "Inspiring workspaces",
+    image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=80",
+    description: "Classic workspace design",
   },
 ];
 

@@ -26,7 +26,7 @@ export const Header = () => {
               <Menu className="h-6 w-6" />
             </Button>
             <a href="/" className="text-2xl font-bold text-wood">
-              WOODCRAFT
+              Elisabeth Laidin Wood Design
             </a>
             <nav className="hidden md:flex space-x-8">
               <a href="#" className="text-neutral-800 hover:text-wood transition-colors">

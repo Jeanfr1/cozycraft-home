@@ -4,21 +4,21 @@ import { Button } from "@/components/ui/button";
 
 const slides = [
   {
-    image: "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&q=80",
-    title: "Handcrafted Excellence",
-    subtitle: "Every piece tells a story of craftsmanship",
+    image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=80",
+    title: "Timeless Elegance",
+    subtitle: "Where vintage meets modern sophistication",
     cta: "Shop Collection",
   },
   {
-    image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&q=80",
-    title: "Timeless Design",
-    subtitle: "Furniture that lasts generations",
+    image: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&q=80",
+    title: "Classic Design",
+    subtitle: "Curated pieces that tell stories",
     cta: "Learn More",
   },
   {
-    image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80",
-    title: "Custom Creation",
-    subtitle: "Your vision, our expertise",
+    image: "https://images.unsplash.com/photo-1501045661006-fcebe0257c3f?auto=format&fit=crop&q=80",
+    title: "Bespoke Creation",
+    subtitle: "Handcrafted to your vision",
     cta: "Start Custom Order",
   },
 ];

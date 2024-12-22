@@ -7,7 +7,7 @@ export const CraftsmanshipSpotlight = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="relative aspect-video rounded-lg overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1612404730960-5c71577fca11?auto=format&fit=crop&q=80"
+              src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&q=80"
               alt="Craftsmanship"
               className="absolute inset-0 w-full h-full object-cover"
             />
