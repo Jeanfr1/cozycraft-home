@@ -55,7 +55,7 @@ export const HeroSlider = () => {
           transition={{ duration: 1 }}
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${slide.image})`,
+            backgroundImage: `url(${slide.image})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -65,7 +65,7 @@ export const HeroSlider = () => {
               initial={{ x: -100, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="max-w-2xl text-white p-8 bg-black/40 rounded-xl relative"
+              className="max-w-2xl text-white p-8 rounded-xl relative"
             >
               <div className="absolute -left-4 top-1/2 w-1 h-20 bg-[#9b87f5] transform -translate-y-1/2"></div>
               <span className="text-sm uppercase tracking-widest text-[#9b87f5] mb-4 block animate-typewriter">
