@@ -33,7 +33,7 @@ export const CraftsmanshipSpotlight = () => {
             </p>
             <ul className="space-y-4">
               <li className="flex items-start space-x-3">
-                <div className="w-6 h-6 rounded-full bg-wood flex-shrink-0" />
+                <div className="w-6 h-6 rounded-full bg-[#9b87f5] flex-shrink-0" />
                 <div>
                   <h3 className="font-bold text-neutral-800">
                     Sustainable Materials
@@ -44,7 +44,7 @@ export const CraftsmanshipSpotlight = () => {
                 </div>
               </li>
               <li className="flex items-start space-x-3">
-                <div className="w-6 h-6 rounded-full bg-wood flex-shrink-0" />
+                <div className="w-6 h-6 rounded-full bg-[#9b87f5] flex-shrink-0" />
                 <div>
                   <h3 className="font-bold text-neutral-800">
                     Traditional Techniques
@@ -55,7 +55,7 @@ export const CraftsmanshipSpotlight = () => {
                 </div>
               </li>
               <li className="flex items-start space-x-3">
-                <div className="w-6 h-6 rounded-full bg-wood flex-shrink-0" />
+                <div className="w-6 h-6 rounded-full bg-[#9b87f5] flex-shrink-0" />
                 <div>
                   <h3 className="font-bold text-neutral-800">
                     Artisan Excellence
