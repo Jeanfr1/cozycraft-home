@@ -106,10 +106,30 @@ export const Footer = () => {
         {/* Payment Methods */}
         <div className="border-t border-neutral-200 pt-8 pb-4">
           <div className="flex flex-wrap justify-center gap-4">
-            <img src="/visa.svg" alt="Visa" className="h-8" loading="lazy" />
-            <img src="/mastercard.svg" alt="Mastercard" className="h-8" loading="lazy" />
-            <img src="/amex.svg" alt="American Express" className="h-8" loading="lazy" />
-            <img src="/paypal.svg" alt="PayPal" className="h-8" loading="lazy" />
+            <img 
+              src="/visa.svg" 
+              alt="Visa" 
+              className="h-8 w-auto" 
+              loading="lazy" 
+            />
+            <img 
+              src="/mastercard.svg" 
+              alt="Mastercard" 
+              className="h-8 w-auto" 
+              loading="lazy" 
+            />
+            <img 
+              src="/amex.svg" 
+              alt="American Express" 
+              className="h-8 w-auto" 
+              loading="lazy" 
+            />
+            <img 
+              src="/paypal.svg" 
+              alt="PayPal" 
+              className="h-8 w-auto" 
+              loading="lazy" 
+            />
           </div>
         </div>
 
