@@ -3,6 +3,8 @@ import { HeroSlider } from "@/components/HeroSlider";
 import { FeaturedCollections } from "@/components/FeaturedCollections";
 import { CraftsmanshipSpotlight } from "@/components/CraftsmanshipSpotlight";
 import { NewArrivals } from "@/components/NewArrivals";
+import { CustomerTestimonials } from "@/components/CustomerTestimonials";
+import { SustainabilityCommitment } from "@/components/SustainabilityCommitment";
 
 const Index = () => {
   return (
@@ -13,6 +15,8 @@ const Index = () => {
         <FeaturedCollections />
         <CraftsmanshipSpotlight />
         <NewArrivals />
+        <CustomerTestimonials />
+        <SustainabilityCommitment />
       </main>
     </div>
   );
