@@ -56,14 +56,16 @@ export const HeroSlider = () => {
           }}
         >
           <div className="container mx-auto h-full flex items-center">
-            <div className="max-w-2xl text-white p-8 animate-fade-in">
-              <h1 className="text-5xl font-bold mb-4">{slide.title}</h1>
-              <p className="text-xl mb-8">{slide.subtitle}</p>
+            <div className="max-w-2xl text-white p-8 animate-fade-in relative">
+              <div className="absolute -left-4 top-1/2 w-1 h-20 bg-[#9b87f5] transform -translate-y-1/2"></div>
+              <h1 className="text-6xl font-light mb-4 leading-tight">{slide.title}</h1>
+              <p className="text-xl mb-8 opacity-90">{slide.subtitle}</p>
               <Button
                 size="lg"
-                className="bg-wood hover:bg-wood-dark text-white"
+                className="bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white transition-all duration-300 relative group"
               >
-                {slide.cta}
+                <span className="relative z-10">{slide.cta}</span>
+                <span className="absolute inset-0 blur-md bg-[#9b87f5] opacity-0 group-hover:opacity-50 transition-opacity duration-300"></span>
               </Button>
             </div>
           </div>
@@ -72,7 +74,7 @@ export const HeroSlider = () => {
       <Button
         variant="ghost"
         size="icon"
-        className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:bg-black/20"
+        className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:bg-[#9b87f5]/20 transition-all duration-300"
         onClick={prevSlide}
       >
         <ArrowLeft className="h-8 w-8" />
@@ -80,7 +82,7 @@ export const HeroSlider = () => {
       <Button
         variant="ghost"
         size="icon"
-        className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:bg-black/20"
+        className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:bg-[#9b87f5]/20 transition-all duration-300"
         onClick={nextSlide}
       >
         <ArrowRight className="h-8 w-8" />
@@ -90,7 +92,7 @@ export const HeroSlider = () => {
           <button
             key={index}
             className={`w-2 h-2 rounded-full transition-all ${
-              index === currentSlide ? "bg-white w-4" : "bg-white/50"
+              index === currentSlide ? "bg-[#9b87f5] w-8" : "bg-white/50"
             }`}
             onClick={() => setCurrentSlide(index)}
           />
