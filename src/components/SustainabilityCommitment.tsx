@@ -33,15 +33,17 @@ export const SustainabilityCommitment = () => {
           {practices.map((practice, index) => (
             <div
               key={index}
-              className="text-center p-6 rounded-lg hover:bg-neutral-50 transition-colors"
+              className="text-center p-6 rounded-lg hover:bg-neutral-50 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#9b87f5]/10 mb-6">
-                <practice.icon className="w-8 h-8 text-[#9b87f5]" />
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#9b87f5]/10 mb-6 group transition-all duration-300 hover:bg-[#9b87f5]/20 animate-float">
+                <practice.icon className="w-8 h-8 text-[#9b87f5] transition-transform duration-300 group-hover:scale-110" />
               </div>
-              <h3 className="text-xl font-bold mb-4 text-neutral-800">
+              <h3 className="text-xl font-bold mb-4 text-neutral-800 transition-colors duration-300 group-hover:text-[#9b87f5]">
                 {practice.title}
               </h3>
-              <p className="text-neutral-600">{practice.description}</p>
+              <p className="text-neutral-600 transition-colors duration-300 group-hover:text-neutral-700">
+                {practice.description}
+              </p>
             </div>
           ))}
         </div>
