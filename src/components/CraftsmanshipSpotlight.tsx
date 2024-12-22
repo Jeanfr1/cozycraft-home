@@ -21,7 +21,10 @@ export const CraftsmanshipSpotlight = () => {
             </video>
           </div>
           <div className="space-y-6">
-            <h2 className="text-4xl font-bold text-neutral-800">Our Craft</h2>
+            <h2 className="text-4xl font-bold text-[#9b87f5] transition-all duration-300 hover:text-[#9b87f5]/80 relative group">
+              Our Craft
+              <span className="absolute inset-0 blur-md bg-[#9b87f5]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+            </h2>
             <p className="text-lg text-neutral-800">
               At Elisabeth Laidin Wood Design, each piece tells a story of
               dedication to timeless craftsmanship. Our artisans blend traditional
@@ -63,8 +66,9 @@ export const CraftsmanshipSpotlight = () => {
                 </div>
               </li>
             </ul>
-            <Button size="lg" className="bg-wood hover:bg-wood-dark text-white">
-              About Our Process
+            <Button className="bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white transition-all duration-300 relative group">
+              <span className="relative z-10">About Our Process</span>
+              <span className="absolute inset-0 blur-md bg-[#9b87f5] opacity-0 group-hover:opacity-50 transition-opacity duration-300"></span>
             </Button>
           </div>
         </div>

@@ -25,8 +25,9 @@ export const SustainabilityCommitment = () => {
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12 text-neutral-800">
+        <h2 className="text-4xl font-bold text-center mb-12 text-[#9b87f5] transition-all duration-300 hover:text-[#9b87f5]/80 relative group">
           Our Commitment to Sustainability
+          <span className="absolute inset-0 blur-md bg-[#9b87f5]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {practices.map((practice, index) => (

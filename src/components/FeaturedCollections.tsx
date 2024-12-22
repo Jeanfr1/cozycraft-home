@@ -27,8 +27,9 @@ export const FeaturedCollections = () => {
   return (
     <section className="py-20 bg-neutral-100">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12 text-neutral-800">
+        <h2 className="text-4xl font-bold text-center mb-12 text-[#9b87f5] transition-all duration-300 hover:text-[#9b87f5]/80 relative group">
           Our Collections
+          <span className="absolute inset-0 blur-md bg-[#9b87f5]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {collections.map((collection) => (
@@ -47,10 +48,10 @@ export const FeaturedCollections = () => {
                   <h3 className="text-2xl font-bold mb-2">{collection.title}</h3>
                   <p className="mb-4">{collection.description}</p>
                   <Button
-                    variant="outline"
-                    className="text-white border-white hover:bg-white hover:text-neutral-800"
+                    className="bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white transition-all duration-300 relative group"
                   >
-                    Explore
+                    <span className="relative z-10">Explore</span>
+                    <span className="absolute inset-0 blur-md bg-[#9b87f5] opacity-0 group-hover:opacity-50 transition-opacity duration-300"></span>
                   </Button>
                 </div>
               </div>
