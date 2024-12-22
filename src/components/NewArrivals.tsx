@@ -1,42 +1,43 @@
 import { useRef } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ProgressiveImg } from "@/components/ui/progressive-img";
 
 const products = [
   {
     id: 1,
-    name: "Artisan Leather Armchair",
+    name: "Sculptural Velvet Armchair",
     price: "$2,499",
-    image: "https://images.unsplash.com/photo-1482881497185-d4a9ddbe4151?auto=format&fit=crop&q=80",
-    description: "Hand-crafted Italian leather",
+    image: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&q=80",
+    description: "Contemporary elegance",
   },
   {
     id: 2,
-    name: "Modern Sculptural Table",
+    name: "Ethereal Glass Console",
     price: "$1,899",
-    image: "https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&q=80",
-    description: "Minimalist design statement",
+    image: "https://images.unsplash.com/photo-1554295405-abb8fd54f153?auto=format&fit=crop&q=80",
+    description: "Minimalist sophistication",
   },
   {
     id: 3,
-    name: "Crystal Glass Cabinet",
+    name: "Artisan Wooden Cabinet",
     price: "$3,299",
-    image: "https://images.unsplash.com/photo-1473177104440-ffee2f376098?auto=format&fit=crop&q=80",
-    description: "Timeless display piece",
+    image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80",
+    description: "Timeless craftsmanship",
   },
   {
     id: 4,
-    name: "Architectural Lounge Chair",
+    name: "Modern Lounge Chair",
     price: "$2,149",
-    image: "https://images.unsplash.com/photo-1494891848038-7bd202a2afeb?auto=format&fit=crop&q=80",
-    description: "Contemporary comfort",
+    image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&q=80",
+    description: "Refined comfort",
   },
   {
     id: 5,
-    name: "Modernist Writing Desk",
+    name: "Designer Writing Desk",
     price: "$2,899",
-    image: "https://images.unsplash.com/photo-1551038247-3d9af20df552?auto=format&fit=crop&q=80",
-    description: "Sophisticated workspace",
+    image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=80",
+    description: "Elegant workspace",
   },
 ];
 
@@ -54,14 +55,14 @@ export const NewArrivals = () => {
   };
 
   return (
-    <section className="py-32 bg-[#F1F0FB]">
+    <section className="py-32 bg-gradient-to-b from-[#F1F0FB] to-white">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center mb-16 text-center">
-          <h2 className="text-5xl font-light text-neutral-800 mb-4">
+          <h2 className="text-5xl font-light text-neutral-800 mb-4 tracking-wide">
             Latest Creations
           </h2>
-          <div className="w-24 h-0.5 bg-wood mb-6"></div>
-          <p className="text-neutral-600 max-w-2xl mx-auto">
+          <div className="w-24 h-0.5 bg-[#9b87f5] mb-6"></div>
+          <p className="text-neutral-600 max-w-2xl mx-auto leading-relaxed">
             Discover our newest collection of meticulously crafted pieces, where timeless elegance meets contemporary design.
           </p>
         </div>
@@ -71,42 +72,42 @@ export const NewArrivals = () => {
             variant="outline"
             size="icon"
             onClick={() => scroll("left")}
-            className="border-[#9b87f5] text-[#9b87f5] hover:bg-[#9b87f5] hover:text-white transition-all duration-300"
+            className="border-[#9b87f5] text-[#9b87f5] hover:bg-[#9b87f5] hover:text-white transition-all duration-300 rounded-full w-12 h-12"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="h-5 w-5" />
           </Button>
           <Button
             variant="outline"
             size="icon"
             onClick={() => scroll("right")}
-            className="border-[#9b87f5] text-[#9b87f5] hover:bg-[#9b87f5] hover:text-white transition-all duration-300"
+            className="border-[#9b87f5] text-[#9b87f5] hover:bg-[#9b87f5] hover:text-white transition-all duration-300 rounded-full w-12 h-12"
           >
-            <ArrowRight className="h-4 w-4" />
+            <ArrowRight className="h-5 w-5" />
           </Button>
         </div>
 
         <div
           ref={scrollContainerRef}
-          className="flex space-x-8 overflow-x-auto scrollbar-hide pb-8"
+          className="flex space-x-8 overflow-x-auto scrollbar-hide pb-8 -mx-4 px-4"
           style={{ scrollSnapType: "x mandatory" }}
         >
           {products.map((product) => (
             <div
               key={product.id}
-              className="flex-none w-80 group"
+              className="flex-none w-[400px] group"
               style={{ scrollSnapAlign: "start" }}
             >
-              <div className="relative aspect-[4/5] mb-6 overflow-hidden rounded-lg">
-                <img
+              <div className="relative aspect-[4/5] mb-6 overflow-hidden rounded-2xl">
+                <ProgressiveImg
                   src={product.image}
                   alt={product.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <Button
-                  className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white text-neutral-800 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0"
+                  className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white text-neutral-800 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 hover:bg-[#9b87f5] hover:text-white"
                 >
-                  View Details
+                  Explore Details
                 </Button>
               </div>
               <h3 className="text-xl font-light text-neutral-800 mb-2">
