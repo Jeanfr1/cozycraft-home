@@ -3,22 +3,22 @@ import { Button } from "@/components/ui/button";
 const collections = [
   {
     title: "Living Room",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?auto=format&fit=crop&q=80",
     description: "Comfort meets elegance",
   },
   {
     title: "Dining Room",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&q=80",
     description: "Gather in style",
   },
   {
     title: "Bedroom",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&q=80",
     description: "Peaceful retreats",
   },
   {
     title: "Home Office",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1486946255434-2466348c2166?auto=format&fit=crop&q=80",
     description: "Inspiring workspaces",
   },
 ];

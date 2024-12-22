@@ -4,19 +4,19 @@ import { Button } from "@/components/ui/button";
 
 const slides = [
   {
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&q=80",
     title: "Handcrafted Excellence",
     subtitle: "Every piece tells a story of craftsmanship",
     cta: "Shop Collection",
   },
   {
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&q=80",
     title: "Timeless Design",
     subtitle: "Furniture that lasts generations",
     cta: "Learn More",
   },
   {
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80",
     title: "Custom Creation",
     subtitle: "Your vision, our expertise",
     cta: "Start Custom Order",

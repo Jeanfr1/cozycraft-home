@@ -7,31 +7,31 @@ const products = [
     id: 1,
     name: "Modern Dining Chair",
     price: "$599",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&q=80",
   },
   {
     id: 2,
     name: "Leather Lounge Chair",
     price: "$1,299",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?auto=format&fit=crop&q=80",
   },
   {
     id: 3,
     name: "Wooden Coffee Table",
     price: "$899",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1532372320572-cda25653a26d?auto=format&fit=crop&q=80",
   },
   {
     id: 4,
     name: "Bedside Table",
     price: "$449",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1611486212557-88be5ff6f941?auto=format&fit=crop&q=80",
   },
   {
     id: 5,
     name: "Office Desk",
     price: "$1,199",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80",
   },
 ];
 
