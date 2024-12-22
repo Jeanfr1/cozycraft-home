@@ -5,6 +5,8 @@ import { CraftsmanshipSpotlight } from "@/components/CraftsmanshipSpotlight";
 import { NewArrivals } from "@/components/NewArrivals";
 import { CustomerTestimonials } from "@/components/CustomerTestimonials";
 import { SustainabilityCommitment } from "@/components/SustainabilityCommitment";
+import { Footer } from "@/components/Footer";
+import { FloatingElements } from "@/components/FloatingElements";
 
 const Index = () => {
   return (
@@ -18,6 +20,8 @@ const Index = () => {
         <CustomerTestimonials />
         <SustainabilityCommitment />
       </main>
+      <Footer />
+      <FloatingElements />
     </div>
   );
 };
