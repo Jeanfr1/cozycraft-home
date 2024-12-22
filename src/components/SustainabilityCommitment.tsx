@@ -35,8 +35,8 @@ export const SustainabilityCommitment = () => {
               key={index}
               className="text-center p-6 rounded-lg hover:bg-neutral-50 transition-colors"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-wood/10 mb-6">
-                <practice.icon className="w-8 h-8 text-wood" />
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#9b87f5]/10 mb-6">
+                <practice.icon className="w-8 h-8 text-[#9b87f5]" />
               </div>
               <h3 className="text-xl font-bold mb-4 text-neutral-800">
                 {practice.title}
