@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { AuthError, AuthChangeEvent } from "@supabase/supabase-js";
+import { AuthError, Session, AuthChangeEvent } from "@supabase/supabase-js";
 
 export const useAuthRedirect = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event: AuthChangeEvent, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event: AuthChangeEvent, session: Session) => {
       if (event === "SIGNED_IN" && session) {
         navigate("/");
         toast({
@@ -58,16 +58,21 @@ export const useAuthRedirect = () => {
       }
     };
 
-    // Subscribe to auth state changes with error handling
-    const authSubscription = supabase.auth.onAuthStateChange((event, session, error) => {
-      if (error) {
-        handleAuthError(error);
+    // Subscribe to auth state changes
+    const { data: { subscription: authSubscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      // Handle any auth errors that might occur during state changes
+      if (event === "SIGNED_IN" && !session) {
+        handleAuthError({
+          message: "Invalid login credentials",
+          name: "AuthError",
+          status: 400,
+        });
       }
     });
 
     return () => {
       subscription.unsubscribe();
-      authSubscription.data.subscription.unsubscribe();
+      authSubscription.unsubscribe();
     };
   }, [navigate, toast]);
 };
