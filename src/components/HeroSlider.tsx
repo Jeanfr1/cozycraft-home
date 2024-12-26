@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const slides = [
   {
@@ -9,23 +10,27 @@ const slides = [
     title: "Élégance Intemporelle ✨",
     subtitle: "Où le vintage rencontre la sophistication moderne",
     cta: "Explorer la Collection",
+    path: "/shop"
   },
   {
     image: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&q=80",
     title: "Design Classique 🎨",
     subtitle: "Des pièces sélectionnées qui racontent des histoires",
     cta: "Découvrir Plus",
+    path: "/about"
   },
   {
     image: "https://images.unsplash.com/photo-1501045661006-fcebe0257c3f?auto=format&fit=crop&q=80",
     title: "Création Sur Mesure 🪑",
     subtitle: "Fabriqué selon votre vision",
     cta: "Commencer Votre Projet",
+    path: "/custom"
   },
 ];
 
 export const HeroSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -40,6 +45,10 @@ export const HeroSlider = () => {
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const handleExplore = (path: string) => {
+    navigate(path);
   };
 
   return (
@@ -80,6 +89,7 @@ export const HeroSlider = () => {
               <Button
                 size="lg"
                 className="bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white transition-all duration-300 relative group"
+                onClick={() => handleExplore(slide.path)}
               >
                 <span className="relative z-10 flex items-center gap-2">
                   {slide.cta}
