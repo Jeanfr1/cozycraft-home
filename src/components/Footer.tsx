@@ -1,5 +1,6 @@
 import { Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
 import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -45,24 +46,24 @@ export const Footer = () => {
             <h3 className="text-lg font-semibold text-[#7E69AB]">Liens Rapides</h3>
             <ul className="space-y-3">
               <li>
-                <a href="/shop" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
+                <Link to="/shop" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
                   Boutique
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/about" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
+                <Link to="/about" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
                   À Propos
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/custom" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
+                <Link to="/custom" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
                   Commandes Sur Mesure
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/blog" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
+                <Link to="/blog" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
                   Blog
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -88,7 +89,7 @@ export const Footer = () => {
               <li>
                 <Link to="/faq" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
                   FAQ
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
