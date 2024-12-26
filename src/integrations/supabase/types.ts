@@ -30,6 +30,48 @@ export type Database = {
         }
         Relationships: []
       }
+      custom_orders: {
+        Row: {
+          budget: string
+          created_at: string
+          description: string
+          dimensions: string
+          email: string
+          full_name: string
+          id: string
+          phone: string
+          project_type: string
+          status: string
+          wood_type: string
+        }
+        Insert: {
+          budget: string
+          created_at?: string
+          description: string
+          dimensions: string
+          email: string
+          full_name: string
+          id?: string
+          phone: string
+          project_type: string
+          status?: string
+          wood_type: string
+        }
+        Update: {
+          budget?: string
+          created_at?: string
+          description?: string
+          dimensions?: string
+          email?: string
+          full_name?: string
+          id?: string
+          phone?: string
+          project_type?: string
+          status?: string
+          wood_type?: string
+        }
+        Relationships: []
+      }
       mood_entries: {
         Row: {
           created_at: string

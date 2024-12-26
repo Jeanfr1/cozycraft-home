@@ -1,39 +1,66 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Form } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import { FormSection } from "./custom-order/FormSection";
+import { formSchema } from "./custom-order/schema";
+import { SubmitButton } from "./custom-order/SubmitButton";
+import { supabase } from "@/integrations/supabase/client";
+import { useState } from "react";
 
-const formSchema = z.object({
-  fullName: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
-  email: z.string().email("Veuillez entrer une adresse email valide"),
-  phone: z.string().min(10, "Veuillez entrer un numéro de téléphone valide"),
-  projectType: z.string().min(1, "Veuillez sélectionner un type de projet"),
-  dimensions: z.string().min(1, "Veuillez spécifier les dimensions souhaitées"),
-  woodType: z.string().min(1, "Veuillez sélectionner un type de bois"),
-  budget: z.string().min(1, "Veuillez sélectionner une gamme de budget"),
-  description: z.string().min(10, "Veuillez décrire votre projet en détail"),
-});
+const personalInfoFields = [
+  { name: "fullName" as const, label: "Nom complet", type: "input", placeholder: "Jean Dupont" },
+  { name: "email" as const, label: "Email", type: "input", placeholder: "jean.dupont@example.com" },
+  { name: "phone" as const, label: "Téléphone", type: "input", placeholder: "06 12 34 56 78" },
+];
+
+const projectDetailsFields = [
+  {
+    name: "projectType" as const,
+    label: "Type de projet",
+    type: "select",
+    placeholder: "Sélectionnez un type de projet",
+    options: [
+      { value: "table", label: "Table" },
+      { value: "armoire", label: "Armoire" },
+      { value: "bibliotheque", label: "Bibliothèque" },
+      { value: "bureau", label: "Bureau" },
+      { value: "autre", label: "Autre" },
+    ],
+  },
+  { name: "dimensions" as const, label: "Dimensions souhaitées", type: "input", placeholder: "ex: 120x80x75 cm" },
+  {
+    name: "woodType" as const,
+    label: "Type de bois",
+    type: "select",
+    placeholder: "Sélectionnez un type de bois",
+    options: [
+      { value: "chene", label: "Chêne" },
+      { value: "noyer", label: "Noyer" },
+      { value: "hetre", label: "Hêtre" },
+      { value: "pin", label: "Pin" },
+      { value: "autre", label: "Autre" },
+    ],
+  },
+  {
+    name: "budget" as const,
+    label: "Budget",
+    type: "select",
+    placeholder: "Sélectionnez une gamme de budget",
+    options: [
+      { value: "500-1000", label: "500€ - 1000€" },
+      { value: "1000-2000", label: "1000€ - 2000€" },
+      { value: "2000-3000", label: "2000€ - 3000€" },
+      { value: "3000+", label: "3000€ +" },
+    ],
+  },
+];
 
 export const CustomOrderForm = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -49,13 +76,24 @@ export const CustomOrderForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true);
     try {
-      // Here we would typically send the form data to a backend
-      console.log(values);
-      toast.success("Votre demande a été envoyée avec succès !");
+      const { error } = await supabase.from("custom_orders").insert([values]);
+      
+      if (error) throw error;
+
+      toast.success("Votre demande a été envoyée avec succès ! Nous vous contacterons bientôt.", {
+        duration: 5000,
+      });
+      
       form.reset();
     } catch (error) {
-      toast.error("Une erreur est survenue. Veuillez réessayer.");
+      console.error("Error submitting form:", error);
+      toast.error("Une erreur est survenue lors de l'envoi. Veuillez réessayer.", {
+        duration: 5000,
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -69,161 +107,35 @@ export const CustomOrderForm = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <FormField
-              control={form.control}
-              name="fullName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Nom complet</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Jean Dupont" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="jean.dupont@example.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Téléphone</FormLabel>
-                  <FormControl>
-                    <Input placeholder="06 12 34 56 78" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="projectType"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Type de projet</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Sélectionnez un type de projet" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="table">Table</SelectItem>
-                      <SelectItem value="armoire">Armoire</SelectItem>
-                      <SelectItem value="bibliotheque">Bibliothèque</SelectItem>
-                      <SelectItem value="bureau">Bureau</SelectItem>
-                      <SelectItem value="autre">Autre</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="dimensions"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Dimensions souhaitées</FormLabel>
-                  <FormControl>
-                    <Input placeholder="ex: 120x80x75 cm" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="woodType"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Type de bois</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Sélectionnez un type de bois" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="chene">Chêne</SelectItem>
-                      <SelectItem value="noyer">Noyer</SelectItem>
-                      <SelectItem value="hetre">Hêtre</SelectItem>
-                      <SelectItem value="pin">Pin</SelectItem>
-                      <SelectItem value="autre">Autre</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="budget"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Budget</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Sélectionnez une gamme de budget" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="500-1000">500€ - 1000€</SelectItem>
-                      <SelectItem value="1000-2000">1000€ - 2000€</SelectItem>
-                      <SelectItem value="2000-3000">2000€ - 3000€</SelectItem>
-                      <SelectItem value="3000+">3000€ +</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <FormSection control={form.control} fields={personalInfoFields} />
+            <FormSection control={form.control} fields={projectDetailsFields} />
           </div>
 
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Description du projet</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Décrivez votre projet en détail (style, finitions souhaitées, contraintes particulières...)"
-                    className="min-h-[150px]"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <Button
-            type="submit"
-            className="w-full bg-[#9b87f5] hover:bg-[#8b77e5] text-white font-semibold py-3"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
           >
-            Envoyer ma demande
-          </Button>
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description du projet</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Décrivez votre projet en détail (style, finitions souhaitées, contraintes particulières...)"
+                      className="min-h-[150px]"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </motion.div>
+
+          <SubmitButton isSubmitting={isSubmitting} />
         </form>
       </Form>
     </motion.div>
