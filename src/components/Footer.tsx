@@ -71,22 +71,22 @@ export const Footer = () => {
             <h3 className="text-lg font-semibold text-[#7E69AB]">Service Client</h3>
             <ul className="space-y-3">
               <li>
-                <a href="/shipping" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
+                <Link to="/shipping" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
                   Informations de Livraison
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/returns" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
+                <Link to="/returns" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
                   Retours & Échanges
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/care" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
+                <Link to="/care" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
                   Instructions d'Entretien
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/faq" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
+                <Link to="/faq" className="text-neutral-600 hover:text-[#9b87f5] transition-colors hover-line">
                   FAQ
                 </a>
               </li>

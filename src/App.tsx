@@ -9,6 +9,10 @@ import Shop from "./pages/Shop";
 import CustomOrder from "./pages/CustomOrder";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
+import Shipping from "./pages/Shipping";
+import Returns from "./pages/Returns";
+import Care from "./pages/Care";
+import FAQ from "./pages/FAQ";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +29,10 @@ const App = () => (
           <Route path="/custom" element={<CustomOrder />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/shipping" element={<Shipping />} />
+          <Route path="/returns" element={<Returns />} />
+          <Route path="/care" element={<Care />} />
+          <Route path="/faq" element={<FAQ />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
