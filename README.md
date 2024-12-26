@@ -1,5 +1,7 @@
 # 🛍️ Elegant E-commerce Platform
 
+![Artisanat Authentique](/public/lovable-uploads/730946d7-d2d8-47f0-bd14-8abc6c16e36c.png)
+
 A modern, elegant e-commerce platform built with React, TypeScript, and Supabase. This project showcases a seamless shopping experience with a beautiful user interface and robust functionality.
 
 ## ✨ Features
