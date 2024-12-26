@@ -14,10 +14,10 @@ export const slides = [
     path: "/about"
   },
   {
-    image: "/lovable-uploads/548769c3-8a76-4a64-9518-00035b2d3aed.png",
-    title: "Design & Élégance 🏠",
-    subtitle: "Des intérieurs qui racontent votre histoire",
-    cta: "Personnaliser votre Espace",
+    image: "/lovable-uploads/27fa9708-0488-43c4-a180-8ca862682001.png",
+    title: "Ambiance & Convivialité ☕",
+    subtitle: "Un espace chaleureux où le bois rencontre la modernité",
+    cta: "Découvrir nos Espaces",
     path: "/custom"
   },
 ];
