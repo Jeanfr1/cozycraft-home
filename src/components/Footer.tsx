@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
+import { Facebook, Instagram, Mail, MapPin, Phone, Twitter, CreditCard } from "lucide-react";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 
@@ -114,29 +114,29 @@ export const Footer = () => {
         </div>
 
         <div className="border-t border-neutral-200 pt-8 pb-6">
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex flex-wrap justify-center items-center gap-8">
             <img 
               src="/visa.svg" 
               alt="Visa" 
-              className="h-8 w-auto opacity-75 hover:opacity-100 transition-opacity" 
+              className="h-6 w-auto opacity-75 hover:opacity-100 transition-opacity" 
               loading="lazy" 
             />
             <img 
               src="/mastercard.svg" 
               alt="Mastercard" 
-              className="h-8 w-auto opacity-75 hover:opacity-100 transition-opacity" 
+              className="h-6 w-auto opacity-75 hover:opacity-100 transition-opacity" 
               loading="lazy" 
             />
             <img 
               src="/amex.svg" 
               alt="American Express" 
-              className="h-8 w-auto opacity-75 hover:opacity-100 transition-opacity" 
+              className="h-6 w-auto opacity-75 hover:opacity-100 transition-opacity" 
               loading="lazy" 
             />
             <img 
               src="/paypal.svg" 
               alt="PayPal" 
-              className="h-8 w-auto opacity-75 hover:opacity-100 transition-opacity" 
+              className="h-6 w-auto opacity-75 hover:opacity-100 transition-opacity" 
               loading="lazy" 
             />
           </div>
