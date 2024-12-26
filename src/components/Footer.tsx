@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Mail, MapPin, Phone, Twitter, CreditCard } from "lucide-react";
+import { Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 
@@ -114,31 +114,27 @@ export const Footer = () => {
         </div>
 
         <div className="border-t border-neutral-200 pt-8 pb-6">
-          <div className="flex flex-wrap justify-center items-center gap-16 px-4">
-            <img 
-              src="/visa.svg" 
-              alt="Visa" 
-              className="h-5 w-auto opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0" 
-              loading="lazy" 
-            />
-            <img 
-              src="/mastercard.svg" 
-              alt="Mastercard" 
-              className="h-8 w-auto opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0" 
-              loading="lazy" 
-            />
-            <img 
-              src="/amex.svg" 
-              alt="American Express" 
-              className="h-5 w-auto opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0" 
-              loading="lazy" 
-            />
-            <img 
-              src="/paypal.svg" 
-              alt="PayPal" 
-              className="h-4 w-auto opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0" 
-              loading="lazy" 
-            />
+          <div className="text-center space-y-4">
+            <h4 className="text-lg font-marcellus text-[#7E69AB] mb-2">
+              Moyens de Paiement Acceptés
+            </h4>
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 text-neutral-600 font-light">
+              <span className="hover:text-[#9b87f5] transition-colors px-2">
+                Visa
+              </span>
+              <span className="text-neutral-300 select-none">|</span>
+              <span className="hover:text-[#9b87f5] transition-colors px-2">
+                Mastercard
+              </span>
+              <span className="text-neutral-300 select-none">|</span>
+              <span className="hover:text-[#9b87f5] transition-colors px-2">
+                American Express
+              </span>
+              <span className="text-neutral-300 select-none">|</span>
+              <span className="hover:text-[#9b87f5] transition-colors px-2">
+                PayPal
+              </span>
+            </div>
           </div>
         </div>
 
