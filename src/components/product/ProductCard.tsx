@@ -23,7 +23,7 @@ export const ProductCard = ({ id, name, price, image, description }: ProductCard
       });
     } catch (error) {
       toast.error("Erreur", {
-        description: "Veuillez vous connecter pour ajouter des produits au panier",
+        description: "Une erreur est survenue lors de l'ajout au panier",
       });
     }
   };

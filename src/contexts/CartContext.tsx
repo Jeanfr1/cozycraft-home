@@ -23,6 +23,15 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     loadCartItems();
+    
+    // Subscribe to auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
+      loadCartItems();
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   useEffect(() => {
@@ -44,14 +53,15 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       }
 
       setCartItems(data || []);
+    } else {
+      setCartItems([]);
     }
   };
 
   const addToCart = async (productId: string) => {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session?.user) {
-      console.error('User must be logged in to add items to cart');
-      return;
+      throw new Error('User must be logged in to add items to cart');
     }
 
     const existingItem = cartItems.find(item => item.product_id === productId);
@@ -73,10 +83,10 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
       if (error) {
         console.error('Error adding to cart:', error);
-        return;
+        throw error;
       }
 
-      setCartItems([...cartItems, data]);
+      setCartItems(prevItems => [...prevItems, data]);
     }
   };
 
@@ -92,10 +102,10 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
     if (error) {
       console.error('Error removing from cart:', error);
-      return;
+      throw error;
     }
 
-    setCartItems(cartItems.filter(item => item.product_id !== productId));
+    setCartItems(prevItems => prevItems.filter(item => item.product_id !== productId));
   };
 
   const updateQuantity = async (productId: string, quantity: number) => {
@@ -115,12 +125,14 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
     if (error) {
       console.error('Error updating quantity:', error);
-      return;
+      throw error;
     }
 
-    setCartItems(cartItems.map(item =>
-      item.product_id === productId ? { ...item, quantity } : item
-    ));
+    setCartItems(prevItems =>
+      prevItems.map(item =>
+        item.product_id === productId ? { ...item, quantity } : item
+      )
+    );
   };
 
   return (
