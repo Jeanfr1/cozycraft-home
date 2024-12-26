@@ -5,30 +5,31 @@ import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useToast } from "@/components/ui/use-toast";
+import { AuthChangeEvent } from "@supabase/supabase-js";
 
 const Login = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' && session) {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event: AuthChangeEvent, session) => {
+      if (event === "SIGNED_IN" && session) {
         navigate("/");
         toast({
           title: "Connexion réussie",
           description: "Bienvenue !",
         });
       }
-      if (event === 'USER_UPDATED' && session) {
+      if (event === "USER_UPDATED" && session) {
         navigate("/");
       }
-      if (event === 'SIGNED_UP') {
+      if (event === "SIGNED_UP") {
         toast({
           title: "Inscription réussie",
           description: "Vous pouvez maintenant vous connecter",
         });
       }
-      if (event === 'SIGNED_OUT') {
+      if (event === "SIGNED_OUT") {
         toast({
           title: "Déconnexion réussie",
           description: "À bientôt !",
@@ -37,8 +38,8 @@ const Login = () => {
     });
 
     // Handle auth errors through the onAuthStateChange event
-    const handleAuthChange = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'USER_DELETED') {
+    const handleAuthChange = supabase.auth.onAuthStateChange((event: AuthChangeEvent) => {
+      if (event === "USER_DELETED") {
         toast({
           title: "Erreur",
           description: "Cette adresse email est déjà utilisée. Veuillez vous connecter.",
