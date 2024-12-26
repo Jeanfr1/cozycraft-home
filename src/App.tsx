@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Shop from "./pages/Shop";
+import CustomOrder from "./pages/CustomOrder";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/custom" element={<CustomOrder />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
