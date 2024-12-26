@@ -114,29 +114,29 @@ export const Footer = () => {
         </div>
 
         <div className="border-t border-neutral-200 pt-8 pb-6">
-          <div className="flex flex-wrap justify-center items-center gap-8">
+          <div className="flex flex-wrap justify-center items-center gap-16 px-4">
             <img 
               src="/visa.svg" 
               alt="Visa" 
-              className="h-6 w-auto opacity-75 hover:opacity-100 transition-opacity" 
+              className="h-5 w-auto opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0" 
               loading="lazy" 
             />
             <img 
               src="/mastercard.svg" 
               alt="Mastercard" 
-              className="h-6 w-auto opacity-75 hover:opacity-100 transition-opacity" 
+              className="h-8 w-auto opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0" 
               loading="lazy" 
             />
             <img 
               src="/amex.svg" 
               alt="American Express" 
-              className="h-6 w-auto opacity-75 hover:opacity-100 transition-opacity" 
+              className="h-5 w-auto opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0" 
               loading="lazy" 
             />
             <img 
               src="/paypal.svg" 
               alt="PayPal" 
-              className="h-6 w-auto opacity-75 hover:opacity-100 transition-opacity" 
+              className="h-4 w-auto opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0" 
               loading="lazy" 
             />
           </div>
