@@ -10,14 +10,36 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Trash2 } from "lucide-react";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+
+const shippingSchema = z.object({
+  fullName: z.string().min(1, "Le nom complet est requis"),
+  address: z.string().min(1, "L'adresse est requise"),
+  city: z.string().min(1, "La ville est requise"),
+  postalCode: z.string().min(5, "Le code postal doit contenir 5 chiffres").max(5),
+  phone: z.string().min(10, "Le numéro de téléphone doit contenir au moins 10 chiffres"),
+});
+
+type ShippingFormData = z.infer<typeof shippingSchema>;
 
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity } = useCart();
   const [step, setStep] = useState<'cart' | 'shipping'>('cart');
   const navigate = useNavigate();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ShippingFormData>({
+    resolver: zodResolver(shippingSchema),
+  });
+
   const subtotal = cartItems.reduce((sum, item) => sum + (Number(item.quantity) || 0), 0);
-  const shipping = 10; // Example shipping cost
+  const shipping = 10;
   const total = subtotal + shipping;
 
   const handleQuantityChange = (productId: string, quantity: number) => {
@@ -29,8 +51,8 @@ const Cart = () => {
     toast.success("Produit retiré du panier");
   };
 
-  const handleCheckout = async () => {
-    // Here we'll implement the checkout logic later
+  const onSubmitShipping = async (data: ShippingFormData) => {
+    console.log("Shipping data:", data);
     toast.success("Commande passée avec succès!");
     navigate('/');
   };
@@ -99,30 +121,92 @@ const Cart = () => {
               {step === 'shipping' && (
                 <div className="bg-white p-6 rounded-lg shadow-sm">
                   <h2 className="text-2xl font-semibold mb-6 text-[#7E69AB]">Informations de livraison</h2>
-                  <div className="space-y-4">
+                  <form onSubmit={handleSubmit(onSubmitShipping)} className="space-y-4">
                     <div>
                       <Label htmlFor="fullName">Nom complet</Label>
-                      <Input id="fullName" placeholder="Votre nom complet" />
+                      <Input 
+                        id="fullName" 
+                        {...register('fullName')} 
+                        className={errors.fullName ? "border-red-500" : ""}
+                      />
+                      {errors.fullName && (
+                        <p className="text-red-500 text-sm mt-1">{errors.fullName.message}</p>
+                      )}
                     </div>
+
                     <div>
                       <Label htmlFor="address">Adresse</Label>
-                      <Input id="address" placeholder="Votre adresse" />
+                      <Input 
+                        id="address" 
+                        {...register('address')}
+                        className={errors.address ? "border-red-500" : ""}
+                      />
+                      {errors.address && (
+                        <p className="text-red-500 text-sm mt-1">{errors.address.message}</p>
+                      )}
                     </div>
+
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="city">Ville</Label>
-                        <Input id="city" placeholder="Votre ville" />
+                        <Input 
+                          id="city" 
+                          {...register('city')}
+                          className={errors.city ? "border-red-500" : ""}
+                        />
+                        {errors.city && (
+                          <p className="text-red-500 text-sm mt-1">{errors.city.message}</p>
+                        )}
                       </div>
                       <div>
                         <Label htmlFor="postalCode">Code postal</Label>
-                        <Input id="postalCode" placeholder="Code postal" />
+                        <Input 
+                          id="postalCode" 
+                          {...register('postalCode')}
+                          className={errors.postalCode ? "border-red-500" : ""}
+                        />
+                        {errors.postalCode && (
+                          <p className="text-red-500 text-sm mt-1">{errors.postalCode.message}</p>
+                        )}
                       </div>
                     </div>
+
                     <div>
                       <Label htmlFor="phone">Téléphone</Label>
-                      <Input id="phone" placeholder="Votre numéro de téléphone" />
+                      <Input 
+                        id="phone" 
+                        {...register('phone')}
+                        className={errors.phone ? "border-red-500" : ""}
+                      />
+                      {errors.phone && (
+                        <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
+                      )}
                     </div>
-                  </div>
+
+                    {Object.keys(errors).length > 0 && (
+                      <Alert variant="destructive" className="mt-4">
+                        <AlertDescription>
+                          Veuillez remplir tous les champs obligatoires correctement.
+                        </AlertDescription>
+                      </Alert>
+                    )}
+
+                    <div className="flex gap-4 mt-6">
+                      <Button 
+                        type="button"
+                        variant="outline" 
+                        onClick={() => setStep('cart')}
+                      >
+                        Retour au panier
+                      </Button>
+                      <Button 
+                        type="submit"
+                        className="bg-[#9b87f5] hover:bg-[#8b76f4]"
+                      >
+                        Confirmer la commande
+                      </Button>
+                    </div>
+                  </form>
                 </div>
               )}
             </div>
@@ -151,23 +235,7 @@ const Cart = () => {
                     >
                       Passer à la livraison
                     </Button>
-                  ) : (
-                    <div className="space-y-2">
-                      <Button 
-                        className="w-full bg-[#9b87f5] hover:bg-[#8b76f4]"
-                        onClick={handleCheckout}
-                      >
-                        Payer
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        className="w-full"
-                        onClick={() => setStep('cart')}
-                      >
-                        Retour au panier
-                      </Button>
-                    </div>
-                  )}
+                  ) : null}
                 </div>
               </div>
             </div>
