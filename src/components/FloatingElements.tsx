@@ -1,15 +1,11 @@
 import { useState, useEffect } from "react";
-import { MessageSquare, ArrowUp, Mail, X } from "lucide-react";
+import { MessageSquare, ArrowUp } from "lucide-react";
 import { Button } from "./ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "./ui/dialog";
-import { Input } from "./ui/input";
 import { useToast } from "./ui/use-toast";
 
 export const FloatingElements = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const [showEmailPopup, setShowEmailPopup] = useState(false);
   const [showCookieConsent, setShowCookieConsent] = useState(true);
-  const [email, setEmail] = useState("");
   const { toast } = useToast();
 
   useEffect(() => {
@@ -20,27 +16,6 @@ export const FloatingElements = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const hasSeenPopup = localStorage.getItem("hasSeenEmailPopup");
-      if (!hasSeenPopup) {
-        setShowEmailPopup(true);
-      }
-    }, 30000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleEmailSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "Thank you for subscribing!",
-      description: "You'll receive our newsletter soon.",
-    });
-    setShowEmailPopup(false);
-    localStorage.setItem("hasSeenEmailPopup", "true");
-  };
 
   const handleCookieConsent = () => {
     setShowCookieConsent(false);
@@ -91,30 +66,6 @@ export const FloatingElements = () => {
           </div>
         </div>
       )}
-
-      {/* Email Signup Popup */}
-      <Dialog open={showEmailPopup} onOpenChange={setShowEmailPopup}>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Join Our Newsletter</DialogTitle>
-            <DialogDescription>
-              Subscribe to receive updates about new collections and exclusive offers.
-            </DialogDescription>
-          </DialogHeader>
-          <form onSubmit={handleEmailSubmit} className="space-y-4">
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <Button type="submit" className="w-full">
-              Subscribe
-            </Button>
-          </form>
-        </DialogContent>
-      </Dialog>
     </>
   );
 };
