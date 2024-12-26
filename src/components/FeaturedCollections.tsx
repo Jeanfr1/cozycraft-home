@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const collections = [
   {
@@ -24,6 +25,13 @@ const collections = [
 ];
 
 export const FeaturedCollections = () => {
+  const handleExplore = (collectionTitle: string) => {
+    toast.info("Collection à venir", {
+      description: `La collection ${collectionTitle} sera bientôt disponible. Restez à l'écoute !`,
+      duration: 3000,
+    });
+  };
+
   return (
     <section className="py-20 bg-neutral-100">
       <div className="container mx-auto px-4">
@@ -49,6 +57,7 @@ export const FeaturedCollections = () => {
                   <p className="mb-4">{collection.description}</p>
                   <Button
                     className="bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white transition-all duration-300 relative group"
+                    onClick={() => handleExplore(collection.title)}
                   >
                     <span className="relative z-10">Explore</span>
                     <span className="absolute inset-0 blur-md bg-[#9b87f5] opacity-0 group-hover:opacity-50 transition-opacity duration-300"></span>
