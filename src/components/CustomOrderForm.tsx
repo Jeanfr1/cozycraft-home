@@ -134,11 +134,11 @@ export const CustomOrderForm = () => {
                   <FormControl>
                     <Textarea
                       placeholder="Décrivez votre projet en détail (style, finitions souhaitées, contraintes particulières...)"
-                      className="min-h-[150px]"
+                      className="min-h-[150px] focus-visible:ring-purple-400"
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-500 text-sm mt-1" />
                 </FormItem>
               )}
             />
