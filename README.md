@@ -50,4 +50,4 @@ Built with [Vite](https://vitejs.dev/), [shadcn/ui](https://ui.shadcn.com/), [Su
 
 ⭐️ If you found this helpful, please star the repo!
 
-Built with ❤️ using [Lovable](https://lovable.dev)
+Built with ❤️ Website URL [Elisabeth Laidin Design Bois](https://woodcraftstore.netlify.app/)
