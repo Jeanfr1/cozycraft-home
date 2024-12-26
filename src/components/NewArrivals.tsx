@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { ProductCard } from "./product/ProductCard";
-import { ProductNavigation } from "./product/ProductNavigation";
 import { ProductSectionHeader } from "./product/ProductSectionHeader";
 import { Button } from "./ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 
 const products = [
   {
@@ -48,47 +48,83 @@ const products = [
 ];
 
 export const NewArrivals = () => {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showAll, setShowAll] = useState(false);
+  const additionalProductsRef = useRef<HTMLDivElement>(null);
 
-  const scroll = (direction: "left" | "right") => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = direction === "left" ? -400 : 400;
-      scrollContainerRef.current.scrollBy({
-        left: scrollAmount,
+  const handleShowMore = () => {
+    setShowAll(true);
+    setTimeout(() => {
+      additionalProductsRef.current?.scrollIntoView({
         behavior: "smooth",
+        block: "start",
       });
-    }
+    }, 100);
   };
-
-  const displayedProducts = showAll ? products : products.slice(0, 3);
 
   return (
     <section className="py-32 bg-gradient-to-b from-[#F1F0FB] to-white">
       <div className="container mx-auto px-4">
         <ProductSectionHeader />
-        <ProductNavigation
-          onPrevClick={() => scroll("left")}
-          onNextClick={() => scroll("right")}
-        />
-        <div
-          ref={scrollContainerRef}
-          className="flex space-x-8 overflow-x-auto scrollbar-hide pb-8 -mx-4 px-4"
-          style={{ scrollSnapType: "x mandatory" }}
-        >
-          {displayedProducts.map((product) => (
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {products.slice(0, 3).map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}
         </div>
-        {!showAll && products.length > 3 && (
-          <div className="flex justify-center mt-8">
-            <Button
-              onClick={() => setShowAll(true)}
-              className="bg-[#9b87f5] text-white hover:bg-[#8b76f4] px-8"
+
+        <AnimatePresence>
+          {showAll && (
+            <motion.div
+              ref={additionalProductsRef}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ 
+                duration: 0.5,
+                ease: "easeInOut"
+              }}
+              className="mt-8"
             >
-              Voir plus
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {products.slice(3).map((product) => (
+                  <motion.div
+                    key={product.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ 
+                      duration: 0.5,
+                      delay: 0.2
+                    }}
+                  >
+                    <ProductCard {...product} />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {!showAll && products.length > 3 && (
+          <motion.div 
+            className="flex justify-center mt-8"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <Button
+              onClick={handleShowMore}
+              className="bg-[#9b87f5] text-white hover:bg-[#8b76f4] px-8 group relative overflow-hidden"
+            >
+              <span className="relative z-10 group-hover:text-white transition-colors">
+                Voir plus
+              </span>
+              <motion.div
+                className="absolute inset-0 bg-[#8b76f4]"
+                initial={{ x: "-100%" }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.3 }}
+              />
             </Button>
-          </div>
+          </motion.div>
         )}
       </div>
     </section>
