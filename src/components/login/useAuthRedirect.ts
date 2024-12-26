@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { AuthChangeEvent } from "@supabase/supabase-js";
+import { AuthError, AuthChangeEvent } from "@supabase/supabase-js";
 
 export const useAuthRedirect = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event: AuthChangeEvent, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event: AuthChangeEvent, session) => {
       if (event === "SIGNED_IN" && session) {
         navigate("/");
         toast({
@@ -20,34 +20,52 @@ export const useAuthRedirect = () => {
       if (event === "USER_UPDATED" && session) {
         navigate("/");
       }
-      if (event === "SIGNED_UP") {
-        toast({
-          title: "Inscription réussie",
-          description: "Vous pouvez maintenant vous connecter",
-        });
-      }
       if (event === "SIGNED_OUT") {
+        navigate("/login");
         toast({
           title: "Déconnexion réussie",
           description: "À bientôt !",
         });
       }
-    });
-
-    // Handle auth errors through the onAuthStateChange event
-    const handleAuthChange = supabase.auth.onAuthStateChange((event: AuthChangeEvent) => {
-      if (event === "USER_DELETED") {
+      if (event === "PASSWORD_RECOVERY") {
         toast({
-          title: "Erreur",
-          description: "Cette adresse email est déjà utilisée. Veuillez vous connecter.",
-          variant: "destructive",
+          title: "Réinitialisation du mot de passe",
+          description: "Veuillez vérifier votre boîte mail",
         });
       }
     });
 
+    // Handle auth errors through error events
+    const handleError = (error: AuthError) => {
+      if (error.message.includes("Email not confirmed")) {
+        toast({
+          title: "Email non confirmé",
+          description: "Veuillez vérifier votre boîte mail pour confirmer votre email",
+          variant: "destructive",
+        });
+      } else if (error.message.includes("Invalid login credentials")) {
+        toast({
+          title: "Erreur de connexion",
+          description: "Email ou mot de passe incorrect",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Erreur",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
+    };
+
+    // Subscribe to auth errors
+    const {
+      data: { subscription: errorSubscription },
+    } = supabase.auth.onError(handleError);
+
     return () => {
       subscription.unsubscribe();
-      handleAuthChange.data.subscription.unsubscribe();
+      errorSubscription.unsubscribe();
     };
   }, [navigate, toast]);
 };
