@@ -1,19 +1,58 @@
 import { useState, useEffect } from "react";
-import { Menu, Search, ShoppingCart, User } from "lucide-react";
+import { Menu, Search, ShoppingCart, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/components/ui/use-toast";
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    // Check and set initial user state
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    // Subscribe to auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      subscription.unsubscribe();
+    };
   }, []);
+
+  const handleAuthClick = async () => {
+    if (user) {
+      try {
+        await supabase.auth.signOut();
+        toast({
+          title: "Déconnexion réussie",
+          description: "À bientôt !",
+        });
+      } catch (error) {
+        toast({
+          title: "Erreur",
+          description: "Une erreur est survenue lors de la déconnexion",
+          variant: "destructive",
+        });
+      }
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
     <motion.header
@@ -62,17 +101,31 @@ export const Header = () => {
             </nav>
           </div>
           <div className="flex items-center space-x-6">
-            {[Search, User, ShoppingCart].map((Icon, index) => (
-              <Button
-                key={index}
-                variant="ghost"
-                size="icon"
-                className="hover:text-[#9b87f5] transition-colors relative group"
-              >
-                <Icon className="h-5 w-5" />
-                <span className="absolute inset-0 blur-md bg-[#9b87f5]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></span>
-              </Button>
-            ))}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="hover:text-[#9b87f5] transition-colors relative group"
+            >
+              <Search className="h-5 w-5" />
+              <span className="absolute inset-0 blur-md bg-[#9b87f5]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></span>
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="hover:text-[#9b87f5] transition-colors relative group"
+              onClick={handleAuthClick}
+            >
+              {user ? <LogOut className="h-5 w-5" /> : <User className="h-5 w-5" />}
+              <span className="absolute inset-0 blur-md bg-[#9b87f5]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></span>
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="hover:text-[#9b87f5] transition-colors relative group"
+            >
+              <ShoppingCart className="h-5 w-5" />
+              <span className="absolute inset-0 blur-md bg-[#9b87f5]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></span>
+            </Button>
           </div>
         </div>
       </div>
