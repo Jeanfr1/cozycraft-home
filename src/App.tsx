@@ -13,6 +13,7 @@ import Shipping from "./pages/Shipping";
 import Returns from "./pages/Returns";
 import Care from "./pages/Care";
 import FAQ from "./pages/FAQ";
+import Cart from "./pages/Cart";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/returns" element={<Returns />} />
             <Route path="/care" element={<Care />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/cart" element={<Cart />} />
           </Routes>
         </TooltipProvider>
       </CartProvider>
