@@ -11,19 +11,19 @@ const testimonials = [
   {
     quote: "L'attention aux détails de notre table à manger est remarquable. Elle est devenue la pièce maîtresse de notre maison.",
     name: "Sarah Mitchell",
-    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80",
+    image: "/lovable-uploads/97b142f5-3944-4c61-bbe8-04b7e05378d8.png",
     rating: 5,
   },
   {
     quote: "Leur engagement envers les pratiques durables tout en maintenant une qualité exceptionnelle est la raison pour laquelle nous revenons.",
     name: "James Wilson",
-    image: "https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&q=80",
+    image: "/lovable-uploads/6d6d94ff-8481-4eb3-9b9e-e99155307a25.png",
     rating: 5,
   },
   {
     quote: "Le fauteuil d'inspiration vintage qu'ils ont créé capture parfaitement l'essence du style de notre maison.",
     name: "Emma Thompson",
-    image: "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=80",
+    image: "/lovable-uploads/0e745342-1687-41ba-9bf4-961031cd08bd.png",
     rating: 5,
   },
 ];
