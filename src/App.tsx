@@ -18,12 +18,12 @@ import FAQ from "./pages/FAQ";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+  <BrowserRouter>
+    <QueryClientProvider client={queryClient}>
       <CartProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
@@ -36,10 +36,10 @@ const App = () => (
             <Route path="/care" element={<Care />} />
             <Route path="/faq" element={<FAQ />} />
           </Routes>
-        </BrowserRouter>
+        </TooltipProvider>
       </CartProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
+    </QueryClientProvider>
+  </BrowserRouter>
 );
 
 export default App;
