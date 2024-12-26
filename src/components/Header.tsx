@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
-import { useCart } from "@/contexts/CartContext";
+import { useCart } from "@/contexts/cart/useCartContext";
 import {
   CommandDialog,
   CommandEmpty,
