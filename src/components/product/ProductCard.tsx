@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ProgressiveImg } from "@/components/ui/progressive-img";
 import { toast } from "sonner";
-import { useCart } from "@/contexts/CartContext";
+import { useCart } from "@/contexts/cart/useCartContext";
 
 interface ProductCardProps {
   id: number;
