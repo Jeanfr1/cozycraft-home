@@ -63,11 +63,7 @@ export const useAuthRedirect = () => {
     // Subscribe to auth state changes and handle errors
     const { data: { subscription: authSubscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_IN" && !session) {
-        const error = new AuthError("Invalid login credentials", {
-          name: "AuthApiError",
-          message: "Invalid login credentials",
-          status: 400,
-        });
+        const error = new AuthError(400, "Invalid login credentials");
         handleAuthError(error);
       }
     });
