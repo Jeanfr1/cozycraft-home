@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ProgressiveImg } from "@/components/ui/progressive-img";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
 
 interface ProductCardProps {
@@ -13,18 +12,8 @@ interface ProductCardProps {
   path: string;
 }
 
-export const ProductCard = ({ id, name, price, image, description, path }: ProductCardProps) => {
-  const navigate = useNavigate();
+export const ProductCard = ({ id, name, price, image, description }: ProductCardProps) => {
   const { addToCart } = useCart();
-
-  const handleExploreDetails = () => {
-    // For now, show a toast since product pages aren't implemented
-    toast.info(`Découvrez ${name}`, {
-      description: "Cette page sera bientôt disponible!",
-    });
-    // When product pages are ready, uncomment:
-    // navigate(path);
-  };
 
   const handleAddToCart = async () => {
     try {
@@ -48,13 +37,7 @@ export const ProductCard = ({ id, name, price, image, description, path }: Produ
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col gap-2 w-[80%] opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-          <Button
-            onClick={handleExploreDetails}
-            className="w-full bg-white text-neutral-800 hover:bg-[#9b87f5] hover:text-white"
-          >
-            Explorer les Détails
-          </Button>
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[80%] opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
           <Button
             onClick={handleAddToCart}
             className="w-full bg-[#9b87f5] text-white hover:bg-[#8b76f4]"
