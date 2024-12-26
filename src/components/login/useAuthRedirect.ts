@@ -35,8 +35,8 @@ export const useAuthRedirect = () => {
       }
     });
 
-    // Handle auth errors through error events
-    const handleError = (error: AuthError) => {
+    // Handle auth errors through the auth state change event
+    const handleAuthError = (error: AuthError) => {
       if (error.message.includes("Email not confirmed")) {
         toast({
           title: "Email non confirmé",
@@ -58,14 +58,16 @@ export const useAuthRedirect = () => {
       }
     };
 
-    // Subscribe to auth errors
-    const {
-      data: { subscription: errorSubscription },
-    } = supabase.auth.onError(handleError);
+    // Subscribe to auth state changes with error handling
+    const authSubscription = supabase.auth.onAuthStateChange((event, session, error) => {
+      if (error) {
+        handleAuthError(error);
+      }
+    });
 
     return () => {
       subscription.unsubscribe();
-      errorSubscription.unsubscribe();
+      authSubscription.data.subscription.unsubscribe();
     };
   }, [navigate, toast]);
 };
