@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Form } from "@/components/ui/form";
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
@@ -12,16 +12,16 @@ import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 
 const personalInfoFields = [
-  { name: "fullName" as const, label: "Nom complet", type: "input", placeholder: "Jean Dupont" },
-  { name: "email" as const, label: "Email", type: "input", placeholder: "jean.dupont@example.com" },
-  { name: "phone" as const, label: "Téléphone", type: "input", placeholder: "06 12 34 56 78" },
+  { name: "fullName" as const, label: "Nom complet", type: "input" as const, placeholder: "Jean Dupont" },
+  { name: "email" as const, label: "Email", type: "input" as const, placeholder: "jean.dupont@example.com" },
+  { name: "phone" as const, label: "Téléphone", type: "input" as const, placeholder: "06 12 34 56 78" },
 ];
 
 const projectDetailsFields = [
   {
     name: "projectType" as const,
     label: "Type de projet",
-    type: "select",
+    type: "select" as const,
     placeholder: "Sélectionnez un type de projet",
     options: [
       { value: "table", label: "Table" },
@@ -31,11 +31,11 @@ const projectDetailsFields = [
       { value: "autre", label: "Autre" },
     ],
   },
-  { name: "dimensions" as const, label: "Dimensions souhaitées", type: "input", placeholder: "ex: 120x80x75 cm" },
+  { name: "dimensions" as const, label: "Dimensions souhaitées", type: "input" as const, placeholder: "ex: 120x80x75 cm" },
   {
     name: "woodType" as const,
     label: "Type de bois",
-    type: "select",
+    type: "select" as const,
     placeholder: "Sélectionnez un type de bois",
     options: [
       { value: "chene", label: "Chêne" },
@@ -48,7 +48,7 @@ const projectDetailsFields = [
   {
     name: "budget" as const,
     label: "Budget",
-    type: "select",
+    type: "select" as const,
     placeholder: "Sélectionnez une gamme de budget",
     options: [
       { value: "500-1000", label: "500€ - 1000€" },
@@ -78,7 +78,16 @@ export const CustomOrderForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.from("custom_orders").insert([values]);
+      const { error } = await supabase.from("custom_orders").insert([{
+        full_name: values.fullName,
+        email: values.email,
+        phone: values.phone,
+        project_type: values.projectType,
+        dimensions: values.dimensions,
+        wood_type: values.woodType,
+        budget: values.budget,
+        description: values.description,
+      }]);
       
       if (error) throw error;
 
