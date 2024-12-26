@@ -1,7 +1,8 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { ProductCard } from "./product/ProductCard";
 import { ProductNavigation } from "./product/ProductNavigation";
 import { ProductSectionHeader } from "./product/ProductSectionHeader";
+import { Button } from "./ui/button";
 
 const products = [
   {
@@ -48,6 +49,7 @@ const products = [
 
 export const NewArrivals = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [showAll, setShowAll] = useState(false);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
@@ -58,6 +60,8 @@ export const NewArrivals = () => {
       });
     }
   };
+
+  const displayedProducts = showAll ? products : products.slice(0, 3);
 
   return (
     <section className="py-32 bg-gradient-to-b from-[#F1F0FB] to-white">
@@ -72,10 +76,20 @@ export const NewArrivals = () => {
           className="flex space-x-8 overflow-x-auto scrollbar-hide pb-8 -mx-4 px-4"
           style={{ scrollSnapType: "x mandatory" }}
         >
-          {products.map((product) => (
+          {displayedProducts.map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}
         </div>
+        {!showAll && products.length > 3 && (
+          <div className="flex justify-center mt-8">
+            <Button
+              onClick={() => setShowAll(true)}
+              className="bg-[#9b87f5] text-white hover:bg-[#8b76f4] px-8"
+            >
+              Voir plus
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
