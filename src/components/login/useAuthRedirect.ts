@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { AuthError, Session, AuthChangeEvent } from "@supabase/supabase-js";
 
@@ -9,7 +9,7 @@ export const useAuthRedirect = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event: AuthChangeEvent, session: Session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event: AuthChangeEvent, session: Session | null) => {
       if (event === "SIGNED_IN" && session) {
         navigate("/");
         toast({
@@ -35,34 +35,39 @@ export const useAuthRedirect = () => {
       }
     });
 
-    // Handle auth errors through the auth state change event
+    // Handle auth errors
     const handleAuthError = (error: AuthError) => {
-      if (error.message.includes("Email not confirmed")) {
-        toast({
-          title: "Email non confirmé",
-          description: "Veuillez vérifier votre boîte mail pour confirmer votre email",
-          variant: "destructive",
-        });
-      } else if (error.message.includes("Invalid login credentials")) {
-        toast({
-          title: "Erreur de connexion",
-          description: "Email ou mot de passe incorrect",
-          variant: "destructive",
-        });
-      } else {
-        toast({
-          title: "Erreur",
-          description: error.message,
-          variant: "destructive",
-        });
+      let title = "Erreur";
+      let description = "Une erreur est survenue";
+
+      switch (error.message) {
+        case "Email not confirmed":
+          title = "Email non confirmé";
+          description = "Veuillez vérifier votre boîte mail pour confirmer votre email";
+          break;
+        case "Invalid login credentials":
+          title = "Erreur de connexion";
+          description = "Email ou mot de passe incorrect";
+          break;
+        default:
+          description = error.message;
       }
+
+      toast({
+        title,
+        description,
+        variant: "destructive",
+      });
     };
 
-    // Subscribe to auth state changes
+    // Subscribe to auth state changes and handle errors
     const { data: { subscription: authSubscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      // Handle any auth errors that might occur during state changes
       if (event === "SIGNED_IN" && !session) {
-        const error = new AuthError("Invalid login credentials");
+        const error = new AuthError("Invalid login credentials", {
+          name: "AuthApiError",
+          message: "Invalid login credentials",
+          status: 400,
+        });
         handleAuthError(error);
       }
     });
