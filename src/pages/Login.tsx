@@ -4,19 +4,54 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useToast } from "@/components/ui/use-toast";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session) {
+      if (event === 'SIGNED_IN' && session) {
         navigate("/");
+      }
+      if (event === 'USER_UPDATED' && session) {
+        navigate("/");
+      }
+      // Handle signup error
+      if (event === 'SIGNED_UP') {
+        toast({
+          title: "Inscription réussie",
+          description: "Vous pouvez maintenant vous connecter",
+        });
       }
     });
 
-    return () => subscription.unsubscribe();
-  }, [navigate]);
+    // Handle auth errors
+    const handleAuthError = (error: Error) => {
+      if (error.message.includes('user_already_exists')) {
+        toast({
+          title: "Erreur d'inscription",
+          description: "Cette adresse email est déjà utilisée. Veuillez vous connecter.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Erreur",
+          description: "Une erreur est survenue. Veuillez réessayer.",
+          variant: "destructive",
+        });
+      }
+    };
+
+    // Subscribe to auth errors
+    const authListener = supabase.auth.onError(handleAuthError);
+
+    return () => {
+      subscription.unsubscribe();
+      authListener.data.subscription.unsubscribe();
+    };
+  }, [navigate, toast]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-purple-50">
