@@ -2,35 +2,29 @@ import { supabase } from "@/integrations/supabase/client";
 import { CartItem } from "./types";
 
 export const loadCartItems = async (): Promise<CartItem[]> => {
-  const { data: { session } } = await supabase.auth.getSession();
-  if (session?.user) {
-    const { data, error } = await supabase
-      .from('user_cart')
-      .select('*')
-      .eq('user_id', session.user.id);
+  const { data, error } = await supabase
+    .from('user_cart')
+    .select('*');
 
-    if (error) {
-      console.error('Error loading cart:', error);
-      return [];
-    }
-
-    return data || [];
+  if (error) {
+    console.error('Error loading cart:', error);
+    return [];
   }
-  return [];
+
+  return data || [];
 };
 
-export const addCartItem = async (userId: string, productId: string): Promise<CartItem | null> => {
+export const addCartItem = async (productId: string): Promise<CartItem | null> => {
   const { data, error } = await supabase
     .from('user_cart')
     .insert([
       {
-        user_id: userId,
         product_id: productId,
         quantity: 1
       }
     ])
     .select()
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error('Error adding to cart:', error);
@@ -40,11 +34,10 @@ export const addCartItem = async (userId: string, productId: string): Promise<Ca
   return data;
 };
 
-export const removeCartItem = async (userId: string, productId: string): Promise<void> => {
+export const removeCartItem = async (productId: string): Promise<void> => {
   const { error } = await supabase
     .from('user_cart')
     .delete()
-    .eq('user_id', userId)
     .eq('product_id', productId);
 
   if (error) {
@@ -54,14 +47,12 @@ export const removeCartItem = async (userId: string, productId: string): Promise
 };
 
 export const updateCartItemQuantity = async (
-  userId: string,
   productId: string,
   quantity: number
 ): Promise<void> => {
   const { error } = await supabase
     .from('user_cart')
     .update({ quantity })
-    .eq('user_id', userId)
     .eq('product_id', productId);
 
   if (error) {

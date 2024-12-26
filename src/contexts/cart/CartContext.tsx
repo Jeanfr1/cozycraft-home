@@ -16,14 +16,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     };
     
     initializeCart();
-    
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
-      initializeCart();
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
   }, []);
 
   useEffect(() => {
@@ -32,17 +24,12 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   }, [cartItems]);
 
   const addToCart = async (productId: string) => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session?.user) {
-      throw new Error('User must be logged in to add items to cart');
-    }
-
     const existingItem = cartItems.find(item => item.product_id === productId);
 
     if (existingItem) {
       await updateQuantity(productId, existingItem.quantity + 1);
     } else {
-      const newItem = await addCartItem(session.user.id, productId);
+      const newItem = await addCartItem(productId);
       if (newItem) {
         setCartItems(prevItems => [...prevItems, newItem]);
       }
@@ -50,23 +37,17 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const removeFromCart = async (productId: string) => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session?.user) return;
-
-    await removeCartItem(session.user.id, productId);
+    await removeCartItem(productId);
     setCartItems(prevItems => prevItems.filter(item => item.product_id !== productId));
   };
 
   const updateQuantity = async (productId: string, quantity: number) => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session?.user) return;
-
     if (quantity <= 0) {
       await removeFromCart(productId);
       return;
     }
 
-    await updateCartItemQuantity(session.user.id, productId, quantity);
+    await updateCartItemQuantity(productId, quantity);
     setCartItems(prevItems =>
       prevItems.map(item =>
         item.product_id === productId ? { ...item, quantity } : item
