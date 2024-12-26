@@ -2,47 +2,55 @@ import { useRef } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProgressiveImg } from "@/components/ui/progressive-img";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const products = [
   {
     id: 1,
-    name: "Fauteuil en Velours Sculptural",
-    price: "2.499 €",
-    image: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&q=80",
-    description: "Élégance contemporaine",
+    name: "Table Basse Minimaliste",
+    price: "1.299 €",
+    image: "/lovable-uploads/59a6153c-1bb8-40c8-bb1e-61e1ac016e5e.png",
+    description: "Design épuré et fonctionnel",
+    path: "/shop/table-basse-minimaliste",
   },
   {
     id: 2,
-    name: "Console en Verre Éthérée",
-    price: "1.899 €",
-    image: "https://images.unsplash.com/photo-1554295405-abb8fd54f153?auto=format&fit=crop&q=80",
-    description: "Sophistication minimaliste",
+    name: "Table à Manger Contemporaine",
+    price: "2.899 €",
+    image: "/lovable-uploads/e3c3f426-4295-44b7-bff2-e8e22ff22316.png",
+    description: "Élégance moderne et raffinée",
+    path: "/shop/table-manger-contemporaine",
   },
   {
     id: 3,
-    name: "Armoire Artisanale en Bois",
-    price: "3.299 €",
-    image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80",
-    description: "Artisanat intemporel",
+    name: "Décoration Murale Artisanale",
+    price: "399 €",
+    image: "/lovable-uploads/906bf6e0-b455-4bb9-bbbf-a6a189cdf626.png",
+    description: "Artisanat authentique",
+    path: "/shop/decoration-murale",
   },
   {
     id: 4,
-    name: "Chaise Longue Moderne",
-    price: "2.149 €",
-    image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&q=80",
-    description: "Confort raffiné",
+    name: "Bureau Design Naturel",
+    price: "1.599 €",
+    image: "/lovable-uploads/7d420449-6857-4ab3-a507-03ae2a679b96.png",
+    description: "Espace de travail zen",
+    path: "/shop/bureau-design",
   },
   {
     id: 5,
-    name: "Bureau Design",
-    price: "2.899 €",
-    image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=80",
-    description: "Espace de travail élégant",
+    name: "Décoration Vintage",
+    price: "249 €",
+    image: "/lovable-uploads/8ef2baf5-99c5-4c3b-9888-5707674e6b7e.png",
+    description: "Charme intemporel",
+    path: "/shop/decoration-vintage",
   },
 ];
 
 export const NewArrivals = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
@@ -52,6 +60,15 @@ export const NewArrivals = () => {
         behavior: "smooth",
       });
     }
+  };
+
+  const handleExploreDetails = (product: typeof products[0]) => {
+    // For now, we'll show a toast since the product pages aren't implemented yet
+    toast.info(`Découvrez ${product.name}`, {
+      description: "Cette page sera bientôt disponible!",
+    });
+    // When product pages are ready, uncomment:
+    // navigate(product.path);
   };
 
   return (
@@ -105,9 +122,10 @@ export const NewArrivals = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <Button
+                  onClick={() => handleExploreDetails(product)}
                   className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white text-neutral-800 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 hover:bg-[#9b87f5] hover:text-white"
                 >
-                  Explore Details
+                  Explorer les Détails
                 </Button>
               </div>
               <h3 className="text-xl font-light text-neutral-800 mb-2">
