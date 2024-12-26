@@ -14,42 +14,42 @@ const Login = () => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN' && session) {
         navigate("/");
+        toast({
+          title: "Connexion réussie",
+          description: "Bienvenue !",
+        });
       }
       if (event === 'USER_UPDATED' && session) {
         navigate("/");
       }
-      // Handle signup error
       if (event === 'SIGNED_UP') {
         toast({
           title: "Inscription réussie",
           description: "Vous pouvez maintenant vous connecter",
         });
       }
+      if (event === 'SIGNED_OUT') {
+        toast({
+          title: "Déconnexion réussie",
+          description: "À bientôt !",
+        });
+      }
     });
 
-    // Handle auth errors
-    const handleAuthError = (error: Error) => {
-      if (error.message.includes('user_already_exists')) {
+    // Handle auth errors through the onAuthStateChange event
+    const handleAuthChange = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'USER_DELETED') {
         toast({
-          title: "Erreur d'inscription",
+          title: "Erreur",
           description: "Cette adresse email est déjà utilisée. Veuillez vous connecter.",
           variant: "destructive",
         });
-      } else {
-        toast({
-          title: "Erreur",
-          description: "Une erreur est survenue. Veuillez réessayer.",
-          variant: "destructive",
-        });
       }
-    };
-
-    // Subscribe to auth errors
-    const authListener = supabase.auth.onError(handleAuthError);
+    });
 
     return () => {
       subscription.unsubscribe();
-      authListener.data.subscription.unsubscribe();
+      handleAuthChange.data.subscription.unsubscribe();
     };
   }, [navigate, toast]);
 
